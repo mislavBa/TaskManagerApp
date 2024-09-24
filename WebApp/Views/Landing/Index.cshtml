@@ -1,0 +1,25 @@
+﻿@{
+    @if (User.Identity.IsAuthenticated)
+    {
+        Layout = "_Layout";
+    }
+    // else if (User.Identity.IsAuthenticated)
+    // {
+    //     Layout = "_LayoutUser";
+    // }
+    else
+    {        
+        Layout = "_LandingLayout";
+    }
+}
+<h1 class="display-1">
+    Task Manager App
+</h1>
+<div class="h-25 w-100 col-12 bg-primary"> Welcome</div>
+<div class="h-25 w-100 col-12 bg-secondary">to</div>
+<div class="h-25 w-100 col-12 bg-success">Landing</div>
+<div class="h-25 w-100 col-12 bg-danger">Page</div>
+<div class="h-25 w-100 col-12 bg-warning">for</div>
+<div class="h-25 w-100 col-12 bg-info">Task</div>
+<div class="h-25 w-100 col-12 bg-light">Manager</div>
+<div class="h-25 w-100 text-light col-12 bg-dark">App</div>

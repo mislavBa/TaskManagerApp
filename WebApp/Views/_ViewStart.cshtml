@@ -1,0 +1,15 @@
+﻿@{
+    var user = ViewContext.HttpContext.User;
+    if (user.IsInRole("admin"))
+    {
+        Layout = "_Layout";
+
+    }
+    else if(user == null)
+    {
+        Layout = "_LandingLayout";
+    }else
+    {
+        Layout = "_LayoutUser";
+    }
+}

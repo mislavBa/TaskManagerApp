@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApp.ViewModels.SkillVM>
+
+@{
+    ViewData["Title"] = "Index";
+    var skills = ViewData["Skills"] as IEnumerable<Skill>;
+}
+
+<h1>Skills</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row">
+    @foreach (var item in skills)
+    {
+        <div class="card border-dark m-1 col-sm-5 col-md-3 col-lg-2 border-start">
+            <div class="card-body text-dark text-center">
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.Name)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </p>
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.Description)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </p>
+            </div>
+            <div class="card-footer text-center">
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </p>
+            </div>
+        </div>
+    }
+</div>

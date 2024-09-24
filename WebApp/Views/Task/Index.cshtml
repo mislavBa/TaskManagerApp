@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebApp.ViewModels.TaskVM>
+
+@{
+    ViewData["Title"] = "Index";
+    var tasks = ViewData["Tasks"] as IEnumerable<WebApp.Models.Task>;
+    var searchQuery = ViewData["SearchQuery"] as string;
+    var currentPage = (int)ViewData["CurrentPage"];
+    var totalPages = (int)ViewData["TotalPages"];
+}
+
+<h1>Tasks</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-group w-25 my-1">
+        <input type="text" name="searchQuery" value="@searchQuery" class="form-control" placeholder="Search..." />
+    </div>
+    <button type="submit" class="btn btn-outline-info my-1">Search</button>
+</form>
+<div class="row">
+    @foreach (var item in tasks)
+    {
+        <div class="card border-dark m-1 border-start col-sm-5 col-md-3 col-lg-2">
+            <div class="card-body text-dark text-center">
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.Name)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </p>
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.Description)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </p>
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </p>
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.DueDate)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </p>
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.ManagerId)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.ManagerId)
+                </p>
+            </div>
+            <div class="card-footer text-center">
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Remove", new { id = item.Id })
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div>
+    @if (currentPage > 1)
+    {
+        <a href="@Url.Action("Index", new {searchQuery = searchQuery, page = currentPage - 1})">Previous</a>
+    }
+
+    Page @currentPage of @totalPages
+
+    @if (currentPage < totalPages)
+    {
+        <a href="@Url.Action("Index", new { searchQuery = searchQuery, page = currentPage + 1 })">Next</a>
+    }
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApp.ViewModels.ManagerVM>
+
+@{
+    ViewData["Title"] = "Index";
+    var managers = ViewData["Managers"] as IEnumerable<Manager>;
+}
+
+<h1>Managers List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row">
+    @foreach (var item in managers)
+    {
+        <div class="card m-1 border-dark border-start col-sm-5 col-md-3 col-lg-2">
+            <div class="card-body text-dark text-center">
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </p>
+                <h5 class="card-title">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </h5>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </p>
+            </div>
+            <div class="card-footer text-center">
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </p>
+            </div>
+        </div>
+    }
+</div>
